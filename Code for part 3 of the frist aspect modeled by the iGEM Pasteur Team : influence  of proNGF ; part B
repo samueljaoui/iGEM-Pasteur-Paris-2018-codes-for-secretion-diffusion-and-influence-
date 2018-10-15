@@ -1,0 +1,7 @@
+function dc = codegithubinfluence2( p1 , t1)
+
+t_final=t1;
+codegithubinfluence1
+dc=polyval(kgradx,p1)
+
+end 
