@@ -1,0 +1,35 @@
+g=zeros(length(t),1); % matrix holding the values of g for each different t when there is a gradient of NGF in the media 
+gcontrole=zeros(length(t),1); % matrix holding the values of g for each different t when there is a gradient of NGF in the media
+G0=10^-7; % cm.s-1 , baseline growth rate 
+k=10^-9;  %  cm2.ml.s-1.ng-1 , gradient factor 
+g(1)=0.01; % cm, intial length of the neuron 
+gcontrole(1)=0.01; % cm, initial length of the neuron 
+
+for i = 2:9999
+    
+    gcontrole(i)=gcontrole(i-1)+dt*(G0);
+    g(i)=gcontrole(i); 
+    if g(i)>L
+        break 
+    end 
+
+end  
+
+for i = 10000 :length(t)
+      
+     g(i)=g(i-1)+dt*(G0+k*codegithubinfluence2(L-g(i-1),i));
+    gcontrole(i)=gcontrole(i-1)+dt*(G0);
+
+     if g(i)>L
+        break 
+    end
+
+end  
+
+figure(1) 
+plot(t,g ,'Linewidth',3)
+hold on 
+plot(t,gcontrole ,'Linewidth',3)
+xlabel( 't(s)')
+ylabel('Nerve growth (cm)')
+title('Evolution of the nerve growth')
