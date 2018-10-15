@@ -1,0 +1,71 @@
+L=0.4 ; % cm ,length of the device
+n=57; % resolution parameters 
+U0=0; % ng.mL-1, proNGF concentration in the media at t = 0 s 
+U1=995;%  ng.mL-1, initial concentration of proNGF at t = 0 s and x = 0 cm 
+U2=0;
+t_final = 100000; %  s , time of the experiment  
+dx = L/n;
+Cdiff=15*10^-7; % cm^2.s-1, diffusion coefficient of proNGF in the media 
+dt=1;
+
+dUdt= zeros(n,1); 
+dUdx=zeros(n,1);
+t=0:dt:t_final;
+x=dx/2:dx:L-dx/2;
+U=ones(n,1)*U0;
+X=ones(n,1)
+
+
+
+
+for j = 1:length(t)
+    for i = 2:n-1
+         dUdt(i)=Cdiff*(-(U(i)-U(i-1))/dx^2 + (U(i+1)-U(i))/dx^2);   
+         dUdx(i)=-((U(i)-U(i-1))/(x(i)-x(i-1)) + (U(i+1)-U(i))/(x(i+1)-x(i)))/2;
+    end
+
+    dUdt(1)=Cdiff* ( -(U(1)-U1)/dx^2 + (U(2)-U(1))/dx^2);
+    dUdt(n)=dUdt(n-1);
+    dUdx(1)=dUdx(2);
+    dUdx(n)=dUdx(n-1);
+  
+    U = U + dUdt*dt;   
+end  
+  
+
+    figure(1)
+    plot(x,U,'Linewidth',3)
+    xlabel( 'Distance (cm)')
+    ylabel('Concentration (ng/mL-1)')
+    title('Concentration de NGF en fonction de x')
+    
+   
+    figure(2)
+    plot(x ,dUdx,'Linewidth',3)
+    xlabel( 'Distance(cm)')
+    ylabel('Gradient de concentration (ng.mL-1.cm-1)')
+    title('Gradient de concentration de NGF en fonction de x')
+  
+  
+  for m = 1:length(x)
+    X(m,1)=x(1,m); 
+    end 
+    
+     % OPTIMISATION USING POLYNOMIALS 
+
+    order=7;
+    p=polyfit(X,U,order)
+    kgradx=polyder(p)
+
+    figure(7)
+    plot(X ,polyval(p,X),'Linewidth',3)
+    xlabel( 'x(cm)')
+    ylabel('Concentration NGF  (ng.mL-1.cm-1)')
+    title('Concentration de NGF en fonction de x')
+    
+    
+    figure(8)
+    plot(x ,polyval(-kgradx,x),'Linewidth',3)
+    xlabel( 'x(cm)')
+    ylabel('NGF concentration gradient (ng.mL-1.cm-1)')
+    title('NGF concentration gradient function of the position')
