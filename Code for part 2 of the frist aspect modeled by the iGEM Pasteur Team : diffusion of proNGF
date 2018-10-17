@@ -47,24 +47,24 @@ end
     title('Gradient de concentration de NGF en fonction de x')
   
   
-  for m = 1:length(x)
+  % OPTIMISATION USING POLYNOMIALS
+  
+    for m = 1:length(x)
     X(m,1)=x(1,m); 
     end 
-    
-     % OPTIMISATION USING POLYNOMIALS 
 
     order=7;
     p=polyfit(X,U,order)
     kgradx=polyder(p)
 
-    figure(7)
+    figure(3)
     plot(X ,polyval(p,X),'Linewidth',3)
     xlabel( 'x(cm)')
     ylabel('Concentration NGF  (ng.mL-1.cm-1)')
     title('Concentration de NGF en fonction de x')
     
     
-    figure(8)
+    figure(4)
     plot(x ,polyval(-kgradx,x),'Linewidth',3)
     xlabel( 'x(cm)')
     ylabel('NGF concentration gradient (ng.mL-1.cm-1)')
