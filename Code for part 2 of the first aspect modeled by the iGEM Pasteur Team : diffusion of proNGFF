@@ -1,3 +1,10 @@
+##This code aims at solving the Fick's law difusion equation by using Euler method. 
+It takes as inputs several parameters ( length of the device, diffusion coefficient in a given media..) 
+and as outputs provide the evolution of the NGF concentration and NGF gradient concentration function of the position.##
+
+
+
+
 L=0.4 ; % cm ,length of the device
 n=57; % resolution parameters 
 U0=0; % ng.mL-1, proNGF concentration in the media at t = 0 s 
