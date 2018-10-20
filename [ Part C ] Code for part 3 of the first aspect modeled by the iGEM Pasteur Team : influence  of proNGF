@@ -1,3 +1,10 @@
+##This code provides the evolution of the growth of the neurons over time.
+It creates two matrices : g and gcontrol whichold the value of the lengths of the axones at different times
+when their is a gradient of NGF in the media ( for the matrix g ) and when their isn't ( for the matrix gcontrol). 
+For each value of g at a given time, the [Part B] provides the value of the NGF gradient concentration at this position and at this time,
+the code then calculates the new length of the neuron at the next time.##
+
+
 g=zeros(length(t),1); % matrix holding the values of g for each different t when there is a gradient of NGF in the media 
 gcontrole=zeros(length(t),1); % matrix holding the values of g for each different t when there is a gradient of NGF in the media
 G0=10^-7; % cm.s-1 , baseline growth rate 
