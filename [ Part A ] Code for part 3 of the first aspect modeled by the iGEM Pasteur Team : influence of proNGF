@@ -1,3 +1,7 @@
+##This code works the same way and provides the same outputs as the code for Part 2 : diffusion of NGF. 
+The only difference is that the variable "t_final" isn't part of the inputs.##
+
+
 L=0.4 ; % cm ,length of the device
 n=57; % resolution parameters 
 U0=0; % ng.mL-1, proNGF concentration in the media at t = 0 s 
