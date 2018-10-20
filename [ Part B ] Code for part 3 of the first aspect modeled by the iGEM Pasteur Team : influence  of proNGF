@@ -1,3 +1,6 @@
+##This function, by taking as inputs a time and a position, 
+gives the value of NGF gradient concentration at this position and at this instant.##
+
 function dc = codegithubinfluence2( p1 , t1)
 
 t_final=t1;
